@@ -5,15 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\View;
 
 class UserController extends Controller
 {   
     
-    public function index(){
-        return 'Hello from UserController';
-    }
+
 
     public function login(){
         if(View::exists('user.login')){
@@ -39,7 +36,7 @@ class UserController extends Controller
 
     public function register(){
         return view('user.register');
-        return redirect('/')->with('message', 'Welcome back!');
+        
     }
 
     public function logout(Request $request){
@@ -61,6 +58,8 @@ class UserController extends Controller
 
         $user = User::create($validated);
         auth()->login($user);
+
+        return redirect('/')->with('message', 'Successfully Registered');
     }
 
     
